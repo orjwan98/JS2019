@@ -47,10 +47,10 @@ var z = c + name;
 
 first();
 
-```Let's visualize this: 
-55
-​
-56
+```
+
+Let's visualize this: 
+
 - First, the current active context (by default) is the global context. 
 
 In this code, we are **declaring** the variable `name`, and the functions `first`, `second` and `third` in the **Global Context**. And we are by default working in that context, but when we call `first()`, is when a new context is created and added to the **Execution Stack**. 
