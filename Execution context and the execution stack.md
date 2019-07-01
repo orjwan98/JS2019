@@ -89,7 +89,7 @@ Like we said previously, when a function is called a new execution context is cr
 1. **Creation Phase**:
 In the creation phase, we define/create/deteremine each property of the execution object above.
 
-2. **ExecutionPhase**:
+2. **ExecutionPhase**: The code of the current execution context is ran line by line.
 
 
 
