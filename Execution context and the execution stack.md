@@ -187,4 +187,6 @@ function sayAge(){
 
 console.log('second',age) //logs second 23
 ```
+# The Creation of the Scoping Chain
+
 
