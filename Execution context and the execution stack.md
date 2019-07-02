@@ -1,4 +1,4 @@
-# what is an execution context? 
+# What is an execution context? 
 
 All JavaScript code needs to run in an environment, and that environment is called **The Execution Context**. You can imagine the Execution Context as a box, a container, or a wrapper which stores variables and a place in which our code is evaluated and executed. 
 
@@ -91,16 +91,100 @@ In the creation phase, we define/create/deteremine each property of the executio
 
 2. **ExecutionPhase**: The code of the current execution context is ran line by line.
 
+# What happens to the Variable Object in the creation phase?
+
+1. The argument object is created, containing all the arguments that were passed into the fucntion. 
+2. The code is scanned for **function declarations**: for each function, a property is created in the Variable Object, **pointing to the function**. This means that all the functions will be stored inside the variable object. Even before the code starts executing. 
+3.The code is scanned for **variable declarations**: for each variable, a property is created in the Variable Object, **and is set to undefined**.
+
+We usually refer to points no.2 and no.3 as **hoisting**. Functions and variables are hoisted in JS, which means that *they are available before the execution phase actually starts*.But there is a difference in the way a variable and a function is hoisted. Functions are actually already defined before the execution phase starts. While variables are setup to `undefined` and will *only* be defined in the execution phase. 
+
+# Hoisting in practice
+
+## Functions and functions expressions hoisiting
+
+Look at the following block  of code and try to guess what will happen. 
+
+```js
+
+calcAge(1998) //will this throw an error or log 21? //it will log 21
+
+function calcAge(currentYear=2019, birthYear){
+console.log(currentYear - birthYear)
+}
+
+```
+Now, you may be thinking that this will throw an error about the function being undefined. But, when the context where `calcAge` lives gets created which in this case, is the global context, all functions get defined in the Variable Object before any code is executed. Which means that the function is available to be used. 
+
+**What about function expressions?**
+This behavior doesn't apply to function expressions. Example:
 
 
+```js
+calcAge(1998) //will this throw an error or log 21? //it will throw a reference type error
 
+var calcAge = function (currentYear=2019, birthYear){
+console.log(currentYear - birthYear)
+}
 
+```
+## Variable hoisting
 
+Look at the following block of code and try to guess what will happen:
 
+```js
 
+console.log(greeting) //logs undefined
 
+var greeting = 'Hi'
+//var farewell = 'Bye'
 
+console.log(greeting) //logs Hi
+console.log(farewell) //logs an error - not defined
+```
+Now, why does this happen?
 
+In the creation phase, variables are declared but their value is set to undefined. So, JS knows we have a variable that holds the name `greeting` but its value is yet to be defined in the execution phase. So when we try to log it, it logs out `undefined`, which is the data type for any variable that doesn't hold a value yet. But JS can't recognize a variable called `farewell` at all. So when we try to log it, it tells us that its `not defined` *at all*.
 
+Now take a look at these next blocks of code and try to understand what is happening:
 
+```js
+var age = 23
+
+sayAge();
+
+function sayAge(){
+  var age = 48
+  console.log('first',age) //logs first 48
+}
+
+console.log('second',age) //logs second 23
+```
+
+In the code snippet above, each one of the `age` variables is a  seperate variable that's living in a different execution context and lives in a seperate variable object than the other. 
+
+```js
+var age = 23
+
+sayAge();
+
+function sayAge(){
+  age = 48
+  console.log('first',age) //logs first 48 
+}
+
+console.log('second',age) //logs second 48
+```
+
+```js
+var age = 23
+
+sayAge();
+
+function sayAge(){
+  console.log('first',age) //logs first 23
+}
+
+console.log('second',age) //logs second 23
+```
 
