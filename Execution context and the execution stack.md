@@ -94,8 +94,8 @@ In the creation phase, we define/create/deteremine each property of the executio
 # What happens to the Variable Object in the creation phase?
 
 1. The argument object is created, containing all the arguments that were passed into the fucntion. 
-2. The code is scanned for **function declarations**: for each function, a property is created in the Variable Object, **pointing to the function**. This means that all the functions will be stored inside the variable object. Even before the code starts executing. 
-3.The code is scanned for **variable declarations**: for each variable, a property is created in the Variable Object, **and is set to undefined**.
+2. The code is scanned for **function declarations**: for each function, a property is created in the Variable Object, **pointing to the function**. This means that all the functions will be stored inside the variable object. Even before the code starts executing.
+3. The code is scanned for **variable declarations**: for each variable, a property is created in the Variable Object, **and is set to undefined**.
 
 We usually refer to points no.2 and no.3 as **hoisting**. Functions and variables are hoisted in JS, which means that *they are available before the execution phase actually starts*.But there is a difference in the way a variable and a function is hoisted. Functions are actually already defined before the execution phase starts. While variables are setup to `undefined` and will *only* be defined in the execution phase. 
 
